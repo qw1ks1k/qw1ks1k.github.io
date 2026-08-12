@@ -18,12 +18,23 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => observer.observe(section));
 
-// 🎵 Настоящий музыкальный плеер
-const audio = document.querySelector(".now-playing audio");
+// 🎵 Музыкальный плеер
+const music = document.getElementById("music");
+const musicButton = document.querySelector(".music-button");
 
-if (audio) {
-  audio.addEventListener("ended", () => {
-    audio.currentTime = 0;
+if (music && musicButton) {
+  musicButton.addEventListener("click", () => {
+    if (music.paused) {
+      music.play();
+      musicButton.textContent = "Ⅱ";
+    } else {
+      music.pause();
+      musicButton.textContent = "▶";
+    }
+  });
+
+  music.addEventListener("ended", () => {
+    musicButton.textContent = "▶";
   });
 }
 
