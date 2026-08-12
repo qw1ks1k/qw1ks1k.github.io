@@ -18,25 +18,12 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => observer.observe(section));
 
-// 🎵 Музыкальный плеер
-const playerButton = document.querySelector(".fake-player button");
+// 🎵 Настоящий музыкальный плеер
+const audio = document.querySelector(".now-playing audio");
 
-if (playerButton) {
-  const audio = new Audio("sekairotten.mp3");
-  audio.loop = false;
-
-  playerButton.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.play();
-      playerButton.textContent = "Ⅱ";
-    } else {
-      audio.pause();
-      playerButton.textContent = "▶";
-    }
-  });
-
+if (audio) {
   audio.addEventListener("ended", () => {
-    playerButton.textContent = "▶";
+    audio.currentTime = 0;
   });
 }
 
